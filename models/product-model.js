@@ -27,9 +27,8 @@ const productSchema = mongoose.Schema({
     default: 0,
   },
   image: {
-    type: String,
+    type: Buffer,
     required: true,
-    trim: true,
   },
   serialNumber: {
     type: Number,

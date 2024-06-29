@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/stylesheets/login.css" />
   </head>
   <body>
@@ -19,16 +20,19 @@
     </div>
 
     <!-- Form -->
-    <div id="form-container">
+    <form action="/" method="post" id="form-container">
       <h1 class="title">Login in</h1>
-      <div class="label">Username</div>
-      <input type="text" />
+      <% if(error.length > 0){ %>
+      <p class="text-red-500 font-[1000]"><%= error %></p>
+      <%} %>
+      <div class="label">Email</div>
+      <input type="email" / name="email">
       <div class="label">Password</div>
-      <input type="password" />
-      <input type="button" class="submit" value="Login in" />
+      <input type="password" name="password" />
+      <input type="submit" class="submit" value="Login in" />
       <div class="label msg">
         ◆ You don't have an account? <a href="/register">Sign up</a>
       </div>
-    </div>
+    </form>
   </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/stylesheets/login.css" />
   </head>
   <body>
@@ -19,18 +20,21 @@
     </div>
 
     <!-- Form -->
-    <div id="form-container">
+    <form action="/register" method="post" id="form-container">
       <h1 class="title">Sign in</h1>
+      <% if(error.length > 0){ %>
+        <p class="text-red-500 font-[1000]"><%= error %></p>
+      <%} %>
       <div class="label">Name</div>
       <input type="text" name="name" />
       <div class="label">Email</div>
       <input type="email" name="email" />
       <div class="label">Password</div>
       <input type="password" name="password" />
-      <input type="button" class="submit" value="Sign in" />
+      <input type="submit" class="submit" value="Sign in" />
       <div class="label msg">
         ◆ Already have an account? <a href="/">login</a>
       </div>
-    </div>
+    </form>
   </body>
 </html>

@@ -2,11 +2,12 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import expressSession from "express-session";
+import flash from "connect-flash"
 import dotenv from "dotenv";
 dotenv.config();
 
 // MongoDB connection
-import mongoDB from "./config/db-connection.js"
+import mongoDB from "./config/db-connection.js";
 
 const app = express();
 
@@ -25,13 +26,16 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(flash());
 
 // Require router
 import indexRoute from "./routes/index-router.js";
+import profileRoute from './routes/profile-router.js'
 import productRoute from "./routes/product-router.js";
 
 // Setup middleware routes
 app.use("/", indexRoute);
+app.use("/profile", profileRoute);
 app.use("/product", productRoute);
 
 app.listen(process.env.PORT, () => {

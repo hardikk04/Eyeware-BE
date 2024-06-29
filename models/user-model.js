@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
 
 const userModel = mongoose.model("user", userSchema);
 
-const userValidator = (data) => {
+const userRegisterValidator = (data) => {
   const joiSchema = Joi.object({
     name: Joi.string().trim().min(3).max(50).required(),
     email: Joi.string().trim().email().required(),
@@ -43,4 +43,13 @@ const userValidator = (data) => {
   return joiSchema.validate(data);
 };
 
-export { userModel, userValidator };
+const userLoginValidator = (data) => {
+  const joiSchema = Joi.object({
+    email: Joi.string().trim().email().required(),
+    password: Joi.string().trim().required(),
+  });
+
+  return joiSchema.validate(data);
+};
+
+export { userModel, userRegisterValidator, userLoginValidator };
