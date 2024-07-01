@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=
+    , initial-scale=1.0"
+    />
+    <title>Create Product</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/login.css" />
+  </head>
+  <body>
+    <div
+      class="main w-full h-screen flex justify-center items-center bg-zinc-800"
+    >
+      <form
+        action="/product/create"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <form action="/" method="post" id="form-container">
+          <h1 class="title">Create Product</h1>
+          <% if(error.length > 0){ %>
+            <p class="text-red-500 font-[1000]"><%= error %></p>
+            <%} %>
+          <div class="label">Title</div>
+          <input type="text" / name="title">
+          <div class="label">Description</div>
+          <input type="text" name="description" />
+          <div class="label">Price</div>
+          <input class="" type="number" name="price" />
+          <div class="label">Size</div>
+          <input type="number" name="size" />
+          <div class="label">inStock</div>
+          <input type="checkbox" name="inStock" />
+          <div class="label">Discount</div>
+          <input type="number" name="discount" />
+          <div class="label">Product Image</div>
+          <input type="file" name="image" />
+          <div class="label">Serial number</div>
+          <input type="number" name="serialNumber" />
+          <input type="submit" class="submit" value="Create" />
+          
+        </form>
+      </form>
+    </div>
+  </body>
+</html>

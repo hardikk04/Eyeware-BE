@@ -15,7 +15,7 @@ const productSchema = mongoose.Schema({
     required: true,
   },
   size: {
-    type: Number,
+    type: String,
     required: true,
   },
   inStock: {
@@ -29,6 +29,10 @@ const productSchema = mongoose.Schema({
   image: {
     type: Buffer,
     required: true,
+  },
+  mimeType: {
+    type: String,
+    default: "",
   },
   serialNumber: {
     type: Number,
@@ -47,10 +51,10 @@ const productValidator = (data) => {
     title: Joi.string().trim().required(),
     description: Joi.string().trim().required(),
     price: Joi.number().required(),
-    size: Joi.number().required(),
+    size: Joi.string().required(),
     inStock: Joi.boolean().default(true),
     discount: Joi.number().default(0),
-    image: Joi.string.trim().required(),
+    mimeType: Joi.string().default(""),
     serialNumber: Joi.number().required(),
   });
 

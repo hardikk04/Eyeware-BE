@@ -20,14 +20,12 @@ const userSchema = mongoose.Schema({
     required: true,
     select: false,
   },
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "product",
-  },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
+  cart: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "product",
+    },
+  ],
 });
 
 const userModel = mongoose.model("user", userSchema);
@@ -37,7 +35,6 @@ const userRegisterValidator = (data) => {
     name: Joi.string().trim().min(3).max(50).required(),
     email: Joi.string().trim().email().required(),
     password: Joi.string().trim().required(),
-    isAdmin: Joi.boolean().default(false),
   });
 
   return joiSchema.validate(data);
