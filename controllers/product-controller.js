@@ -1,7 +1,13 @@
 import { productModel, productValidator } from "../models/product-model.js";
+import { userModel } from "../models/user-model.js";
 
-const productPageRenderController = (req, res) => {
-  res.render("product");
+const productPageRenderController = async (req, res) => {
+  try {
+    const product = await productModel.findOne({ _id: req.params.id });
+    res.render("product", { product, user: req.user });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 };
 
 const productCreateController = async (req, res) => {
@@ -46,9 +52,8 @@ const productCreateController = async (req, res) => {
       mimeType: req.file.mimetype,
       user: user._id.toString(),
     });
-    user.cart.push(product._id);
-    await user.save();
-    res.send(product);
+
+    res.redirect("/profile");
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -62,8 +67,35 @@ const productCreateRenderController = (req, res) => {
   }
 };
 
+const productAddToCartController = async (req, res) => {
+  try {
+    const product = await productModel.findOne({ _id: req.params.id });
+    req.user.cart.push(product._id);
+    await req.user.save();
+    const previousPage = req.headers.referer || "/profile";
+    res.redirect(previousPage);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+const productRemoveToCartController = async (req, res) => {
+  try {
+    req.user.cart = req.user.cart.filter((product) => {
+      return product._id.toString() !== req.params.id;
+    });
+    await req.user.save();
+    const previousPage = req.headers.referer || "/profile";
+    res.redirect(previousPage);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 export {
   productPageRenderController,
   productCreateController,
   productCreateRenderController,
+  productAddToCartController,
+  productRemoveToCartController,
 };

@@ -7,26 +7,58 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
   </head>
   <body>
-    <div class="main overflow-x-hidden">
+    <div class="main relative overflow-x-hidden">
       <div
-        class="nav absolute top-2 left-2 text-white flex justify-between items-center w-full px-4 py-2"
+        class="nav absolute z-10 top-2 left-2 text-white flex justify-between items-center w-full px-4 py-2"
       >
         <a href="#"
           ><img src="https://x8.adencys.com/img/logo2.svg" alt=""
         /></a>
         <div class="flex gap-8">
           <a href="/product/create">Create Product</a>
-          <a href="#">CART(0)</a>
+          <a class="cart" href="#">CART(0)</a>
           <a href="/profile/logout" class="text-red-500">Logout</a>
         </div>
       </div>
 
-      <div class="page1 h-[100vh] w-full overflow-hidden bg-black py-[5vw]">
+      <div
+        class="page1 relative h-[100vh] w-full overflow-hidden bg-black py-[5vw]"
+      >
+        <div
+          class="cart-box z-20 absolute right-[-65%] top-0 h-full w-[65%] bg-black p-4"
+        >
+          <i
+            class="close ri-close-large-line text-zinc-400 text-[1.3vw] cursor-pointer"
+          ></i>
+          <div class="line w-full h-[1px] bg-zinc-600 mt-14"></div>
+          <div class="product h-[25vh] w-full py-4 flex">
+            <div class="img h-full w-[10vw] bg-red-300 overflow-hidden"></div>
+            <div class="content flex justify-between w-full pl-5">
+              <div class="elem">
+                <h1 class="text-zinc-400">Name</h1>
+              </div>
+              <div class="elem">
+                <h1 class="text-zinc-400">$464</h1>
+                <a href="#" class="text-zinc-500 mt-14 inline-block">Remove</a>
+              </div>
+            </div>
+          </div>
+          <div class="line w-full h-[1px] bg-zinc-100"></div>
+          <div class="checkout w-full flex justify-end">
+            <h1 class="text-zinc-500 text-sm mt-2">
+              TOTAL <span class="text-white">$256</span>
+            </h1>
+          </div>
+        </div>
         <video
           class="object-cover h-full w-full"
           muted
@@ -36,91 +68,85 @@
         ></video>
       </div>
       <div class="page2 h-[100vh] w-full bg-black px-4 pt-5 overflow-hidden">
-        <form action="" class="text-zinc-500 relative w-64">
+        <form action="" class="text-zinc-500 relative w-fit">
           <div class="flex gap-[8vw]">
-            <label>Style</label>
-            <select class="outline-none bg-transparent">
-              <option value="All">All</option>
-              <option value="Style 1">Style 1</option>
-              <option value="Style 2">Style 2</option>
-              <option value="Style 3">Style 3</option>
-            </select>
+            <h1 class="text-[3vw] whitespace-nowrap text-zinc-300">
+              Our Products
+            </h1>
           </div>
           <div class="filter-line h-[.5px] bg-white/45 mt-2"></div>
         </form>
         <div class="swiper mySwiper mt-6">
           <div class="swiper-wrapper">
+            <% products.forEach((product,index) =>{ %> <% if(index !== 8){ %>
             <div class="swiper-slide">
-              <div class="img h-[95%] w-full bg-red-400 overflow-hidden">
-                <img
-                  class="object-cover h-full w-full"
-                  src="https://x8.adencys.com/img/product4/X1-001-1.jpg"
-                  alt=""
-                />
-              </div>
-              <div class="text-zinc-400 flex justify-between mt-2">
-                <h3>Name</h3>
-                <h3>Price</h3>
-              </div>
+              <a href="/product/<%= product._id %>">
+                <div class="img h-[95%] w-full overflow-hidden">
+                  <img
+                    class="object-cover h-full w-full"
+                    src="data:<%= product.mimeType %>;base64,<%= product.image.toString('base64') %>"
+                    alt=""
+                  />
+                </div>
+                <div class="text-zinc-400 flex justify-between mt-2">
+                  <h3><%= product.title %></h3>
+                  <h3>$<%= product.price %></h3>
+                </div>
+              </a>
             </div>
-            <div class="swiper-slide">
-              <div class="img h-[95%] w-full bg-red-400 overflow-hidden">
-                <img
-                  class="object-cover h-full w-full"
-                  src="https://x8.adencys.com/img/product4/X1-001-1.jpg"
-                  alt=""
-                />
-              </div>
-              <div class="text-zinc-400 flex justify-between mt-2">
-                <h3>Name</h3>
-                <h3>Price</h3>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="img h-[95%] w-full bg-red-400 overflow-hidden">
-                <img
-                  class="object-cover h-full w-full"
-                  src="https://x8.adencys.com/img/product4/X1-001-1.jpg"
-                  alt=""
-                />
-              </div>
-              <div class="text-zinc-400 flex justify-between mt-2">
-                <h3>Name</h3>
-                <h3>Price</h3>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="img h-[95%] w-full bg-red-400 overflow-hidden">
-                <img
-                  class="object-cover h-full w-full"
-                  src="https://x8.adencys.com/img/product4/X1-001-1.jpg"
-                  alt=""
-                />
-              </div>
-              <div class="text-zinc-400 flex justify-between mt-2">
-                <h3>Name</h3>
-                <h3>Price</h3>
-              </div>
-            </div>
+            <%} %> <% }) %>
           </div>
         </div>
       </div>
       <div class="page3 h-min-[100vh] w-full relative">
+        <% products.forEach((product,index)=>{ %> <% if(index === 0) { %>
         <div class="part1 sticky top-0 h-[100vh] w-full flex justify-between">
           <div
             class="left w-1/2 h-full bg-white flex flex-col justify-end text-black px-3 pb-[1vw]"
           >
-            <p class="text-[.8vw] leading-[1]">
-              WHIP ON THESE FASHIONABLE FRAMES DETAILED WITH AERODYNAMICALLY
-              ENGINEERED TITANIUM BROWS AND LIGHTWEIGHT TITANIUM LIBRARY TEMPLES
-              WITH CUSTOM RUBBER TIPS TO BE STYLISHLY COMFORTABLE ANYWHERE,
-              ANYTIME.
-            </p>
+            <p class="text-[.8vw] leading-[1]"><%= product.description %></p>
             <div
               class="flex justify-between text-[5vw] font-[700] leading-[.9]"
             >
-              <h1>ANIMUS Y2</h1>
-              <h1>001</h1>
+              <h1><%= product.title %></h1>
+              <h1><%= product.serialNumber %></h1>
+            </div>
+            <div class="flex justify-end">
+              <% if(user.cart.includes(product._id)){ %>
+              <a
+                class="text-white w-fit rounded-md px-4 py-1 bg-red-500 mt-4 text-sm"
+                href="/product/remove/<%= product._id %>"
+                >Remove From Cart</a
+              >
+              <%} else{ %>
+              <a
+                class="text-white w-fit rounded-md px-4 py-1 bg-black mt-4 text-sm"
+                href="/product/add/<%= product._id %>"
+                >Quick Add</a
+              >
+              <%} %>
+            </div>
+          </div>
+          <div class="left w-1/2 h-full">
+            <img
+              src="data:<%= product.mimeType %>;base64,<%= product.image.toString('base64') %>"
+              class="h-full w-full object-cover"
+              src="data:<%= product.mimeType %>;base64,<%= product.image.toString('base64') %>"
+              alt=""
+            />
+          </div>
+        </div>
+        <%}%> <% if(index === 1) { %>
+        <div class="part1 sticky top-0 h-[100vh] w-full flex justify-between">
+          <div
+            class="left w-1/2 h-full bg-white flex flex-col justify-end text-black px-3 pb-[1vw]"
+          >
+            <p class="text-[.8vw] leading-[1]"><%= product.description %></p>
+            <div
+              class="flex justify-between text-[5vw] font-[700] leading-[.9]"
+            >
+              <h1><%= product.title %></h1>
+              <h1><%= product.serialNumber %></h1>
             </div>
             <div class="flex justify-end">
               <a
@@ -133,65 +159,29 @@
           <div class="left w-1/2 h-full bg-red-500">
             <img
               class="h-full w-full object-cover"
-              src="https://x8.adencys.com/img/cards/card-1.jpg"
+              src="data:<%= product.mimeType %>;base64,<%= product.image.toString('base64') %>"
               alt=""
             />
           </div>
         </div>
-        <div class="part1 sticky top-0 h-[100vh] w-full flex justify-between">
-          <div
-            class="left w-1/2 h-full bg-white flex flex-col justify-end text-black px-3 pb-[1vw]"
-          >
-            <p class="text-[.8vw] leading-[1]">
-              WHIP ON THESE FASHIONABLE FRAMES DETAILED WITH AERODYNAMICALLY
-              ENGINEERED TITANIUM BROWS AND LIGHTWEIGHT TITANIUM LIBRARY TEMPLES
-              WITH CUSTOM RUBBER TIPS TO BE STYLISHLY COMFORTABLE ANYWHERE,
-              ANYTIME.
-            </p>
-            <div
-              class="flex justify-between text-[5vw] font-[700] leading-[.9]"
-            >
-              <h1>ANIMUS Y2</h1>
-              <h1>002</h1>
-            </div>
-            <div class="flex justify-end">
-              <a
-                class="text-white w-fit rounded-md px-4 py-1 bg-black mt-4 text-sm"
-                href="#"
-                >Quick Add</a
-              >
-            </div>
-          </div>
-          <div class="left w-1/2 h-full bg-red-500">
-            <img
-              class="h-full w-full object-cover"
-              src="https://x8.adencys.com/img/cards/card-2.jpg"
-              alt=""
-            />
-          </div>
-        </div>
+        <%}%> <% if(index === 2) { %>
         <div class="part1 sticky top-0 h-[100vh] w-full flex justify-between">
           <div class="left w-1/2 h-full bg-red-500">
             <img
               class="h-full w-full object-cover"
-              src="https://x8.adencys.com/img/cards/card-3.jpg"
+              src="data:<%= product.mimeType %>;base64,<%= product.image.toString('base64') %>"
               alt=""
             />
           </div>
           <div
             class="left w-1/2 h-full bg-white flex flex-col justify-end text-black px-3 pb-[1vw]"
           >
-            <p class="text-[.8vw] leading-[1]">
-              WHIP ON THESE FASHIONABLE FRAMES DETAILED WITH AERODYNAMICALLY
-              ENGINEERED TITANIUM BROWS AND LIGHTWEIGHT TITANIUM LIBRARY TEMPLES
-              WITH CUSTOM RUBBER TIPS TO BE STYLISHLY COMFORTABLE ANYWHERE,
-              ANYTIME.
-            </p>
+            <p class="text-[.8vw] leading-[1]"><%= product.description %></p>
             <div
               class="flex justify-between text-[5vw] font-[700] leading-[.9]"
             >
-              <h1>ANIMA X3</h1>
-              <h1>003</h1>
+              <h1><%= product.title %></h1>
+              <h1><%= product.serialNumber %></h1>
             </div>
             <div class="flex justify-end">
               <a
@@ -202,6 +192,7 @@
             </div>
           </div>
         </div>
+        <%}%> <%}) %>
       </div>
       <div class="page4 h-[100vh] w-full overflow-hidden">
         <img
@@ -231,6 +222,13 @@
         </div>
       </div>
     </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="https://unpkg.com/lenis@1.1.4/dist/lenis.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="/javascripts/fe-index.js"></script>

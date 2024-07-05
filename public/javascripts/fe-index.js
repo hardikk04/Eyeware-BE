@@ -17,3 +17,19 @@ const swiper = new Swiper(".mySwiper", {
     clickable: true,
   },
 });
+
+const cart = document.querySelector(".cart");
+const close = document.querySelector(".close");
+
+const cartBox = document.querySelector(".cart-box");
+cart.addEventListener("click", () => {
+  gsap.to(".cart-box", {
+    right: 0,
+  });
+});
+
+close.addEventListener("click", () => {
+  gsap.to(".cart-box", {
+    right: "-65%",
+  });
+});

@@ -18,5 +18,9 @@
 //     type: Boolean,
 //     default: false,
 //   },
+//   products: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "product",
+//   },
 // });
 
