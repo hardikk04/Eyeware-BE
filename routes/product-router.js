@@ -4,7 +4,7 @@ import {
   productCreateController,
   productCreateRenderController,
   productAddToCartController,
-  productRemoveToCartController
+  productRemoveToCartController,
 } from "../controllers/product-controller.js";
 import {
   isLoggedIn,
@@ -20,7 +20,7 @@ router.get("/:id", isLoggedIn, productPageRenderController);
 router.get("/add/:id", isLoggedIn, productAddToCartController);
 router.get("/remove/:id", isLoggedIn, productRemoveToCartController);
 
-router.get("/create", isLoggedIn, productCreateRenderController);
+router.get("/", isLoggedIn, productCreateRenderController);
 router.post(
   "/create",
   isLoggedIn,
