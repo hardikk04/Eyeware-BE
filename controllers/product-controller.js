@@ -70,6 +70,7 @@ const productCreateRenderController = (req, res) => {
 const productAddToCartController = async (req, res) => {
   try {
     const product = await productModel.findOne({ _id: req.params.id });
+
     req.user.cart.push(product._id);
     await req.user.save();
     const previousPage = req.headers.referer || "/profile";
